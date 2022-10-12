@@ -24,6 +24,11 @@
       ansible.builtin.apt:
         upgrade: dist
 
+    - name: Check if reboot required
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+
     - name: Install packages
       ansible.builtin.apt:
         pkg: "{{ proxmox_packages }}"
@@ -61,8 +66,19 @@
     - /etc/hosts
     - /etc/network/interfaces
 
-#- name: Reboot
-#  ansible.builtin.reboot:
-#    reboot_timeout: 0
-#  ignore_errors: true
+- name: Download ISOs
+  ansible.builtin.get_url:
+    url: "{{ item }}"
+    dest: "/var/lib/vz/template/iso/{{ item | basename }}"
+    force: no
+  loop: "{{ iso_images }}"
 
+- name: Reboot (proxmox upgraded with reboot required)
+  ansible.builtin.reboot:
+  when: new_ip in ansible_facts['all_ipv4_addresses'] and reboot_required_file.stat.exists == true
+
+- name: Reboot (ip changed)
+  ansible.builtin.reboot:
+    reboot_timeout: 0
+  ignore_errors: true
+  when: new_ip not in ansible_facts['all_ipv4_addresses']

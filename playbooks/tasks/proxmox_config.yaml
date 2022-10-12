@@ -1,5 +1,5 @@
 ---
-- hosts: '{{target|default("all")}}'
+- hosts: 'proxmox_compute'
   collections:
     - kmendez.lab_setup
   roles:
