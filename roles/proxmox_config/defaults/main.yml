@@ -1,0 +1,33 @@
+---
+# defaults file for proxmox_config
+
+proxmox_non_enterprise_subscription: deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+
+proxmox_packages:
+  - sudo
+  - libgl1
+  - libegl1
+  - sysstat
+  - htop
+  - vim
+  - iperf
+  - mate
+  - chromium
+  - lightdm
+  - mesa-utils
+  - virt-viewer
+  - remmina 
+
+disabled_services:
+  - lightdm
+
+# generate password hash via:
+#  mkpasswd --method=sha-512 my_super_secure_password
+users:
+  - user_name: kmendez
+    full_name: "Khary Mendez"
+    password: "$6$HhwPB/v5ZmrPbZgP$IgYUvQCZ8fltbw.3QXWKC9juFTh4O/OFyHYT1.535TOOwshlVIBfdg8z2gHyJWIektVqXuEEzoQGZ2F354Xz01"
+    groups: "sudo"
+
+external_packages:
+  - https://download.nomachine.com/download/8.1/Linux/nomachine_8.1.2_1_amd64.deb

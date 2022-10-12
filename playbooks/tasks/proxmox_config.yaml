@@ -1,0 +1,6 @@
+---
+- hosts: '{{target|default("all")}}'
+  collections:
+    - kmendez.lab_setup
+  roles:
+    - role: ../../roles/proxmox_config

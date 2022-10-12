@@ -1,0 +1,68 @@
+---
+# tasks file for proxmox_config
+
+- name: Update repositories
+  block:
+    - name: Add "no subscription" repo
+      ansible.builtin.lineinfile:
+        path: /etc/apt/sources.list
+        line: "{{ proxmox_non_enterprise_subscription }}"
+
+    - name: Disable enterprise repository
+      replace:
+        path: /etc/apt/sources.list.d/pve-enterprise.list
+        regexp: '^(deb.*)'
+        replace: '# \1'
+
+- name: Update proxmox software
+  block:
+    - name: Update proxmox
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Upgrade proxmox
+      ansible.builtin.apt:
+        upgrade: dist
+
+    - name: Install packages
+      ansible.builtin.apt:
+        pkg: "{{ proxmox_packages }}"
+
+    - name: Disable services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: false
+        state: stopped
+      loop: "{{ disabled_services }}"
+
+    - name: Install external software packages
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+      loop: "{{ external_packages }}"
+
+- name: Add users
+  ansible.builtin.user:
+    name: "{{ item.user_name }}"
+    comment: "{{ item.full_name }}"
+    password: "{{ item.password }}"
+    groups: "{{ item.groups }}"
+    state: present
+    shell: '/bin/bash'
+    update_password: on_create
+  loop: "{{ users }}"
+
+- name: Updating IP address
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    backup: yes
+    regexp: "{{ inventory_hostname }}"
+    replace: "{{ new_ip }}"
+  loop:
+    - /etc/hosts
+    - /etc/network/interfaces
+
+#- name: Reboot
+#  ansible.builtin.reboot:
+#    reboot_timeout: 0
+#  ignore_errors: true
+
