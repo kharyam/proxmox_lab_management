@@ -8,3 +8,4 @@
     host: "{{ inventory_hostname }}"
     port: "{{ ui_port }}"
     state: stopped
+    timeout: 600
