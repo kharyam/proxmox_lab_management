@@ -1,0 +1,16 @@
+---
+- name: Log share type
+  ansible.builtin.debug:
+    msg: Creating {{ item.count }} exports for {{ item.name }}
+- name: Set filename prefix
+  ansible.builtin.set_fact:
+    filename: "{{ item.name }}"
+- name: Create share directories
+  ansible.builtin.file:
+    path: '{{ exports_path }}/{{ filename }}_{{ "%03d" | format(count | int) }}'
+    state: directory
+    # TODO: Fix this!
+    mode: 0777
+  with_sequence: start=1 end={{ item.count }}
+  loop_control:
+    loop_var: count

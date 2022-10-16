@@ -1,7 +1,7 @@
-proxmox_config
+nfs
 =========
 
-Configure proxmox nodes
+Create an nfs server with on a fedora server and create corresponding OpenShift PVs
 
 Requirements
 ------------

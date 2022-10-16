@@ -1,7 +1,7 @@
-proxmox_config
+Role Name
 =========
 
-Configure proxmox nodes
+A brief description of the role goes here.
 
 Requirements
 ------------

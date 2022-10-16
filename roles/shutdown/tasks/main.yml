@@ -1,0 +1,11 @@
+---
+# tasks file for shutdown
+- name: Unconditionally shut down the baremetal server
+  community.general.shutdown:
+  
+- name: Wait for port to close active connections
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: "{{ ui_port }}"
+    state: stopped
+  ignore_unreachable: true

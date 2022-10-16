@@ -1,0 +1,35 @@
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+
+- name: Update /etc/idmadp.conf
+  ansible.builtin.lineinfile:
+    path: /etc/idmapd.conf
+    line: "Domain = {{ inventory_hostname }}"
+
+- name: Create all share directories
+  include_tasks: create_shares.yml
+  loop: "{{ exports }}"
+
+- name: Create exports
+  ansible.builtin.template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable and (re)start services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: yes
+    state: restarted
+  loop: "{{ services }}"
+
+- name: Configure firewall
+  ansible.posix.firewalld:
+    service: nfs
+    permanent: yes
+    state: enabled
+    immediate: yes

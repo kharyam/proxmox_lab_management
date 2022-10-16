@@ -1,0 +1,23 @@
+---
+# defaults file for nfs
+
+# NFS Server Vars
+packages:
+  - "nfs-utils"
+
+services:
+  - rpcbind
+  - nfs-server
+
+exports_path: /mnt/ocp-exports
+
+exports:
+  - name: pv1g
+    count: 40
+  - name: pv5g
+    count: 30
+  - name: pv10g
+    count: 20
+  - name: pv40g
+    count: 3
+# OCP Vars

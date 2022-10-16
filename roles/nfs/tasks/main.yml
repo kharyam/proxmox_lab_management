@@ -1,0 +1,7 @@
+---
+# tasks file for nfs and ocp
+- name: Configure nfs servers
+  include_tasks: config_nfs.yml
+
+- name: Configure OCP PVs
+  include_tasks: config_ocp.yml

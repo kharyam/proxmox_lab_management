@@ -1,0 +1,5 @@
+{%- for export in exports %}
+{%- for instance in range(export.count) %}
+{{ exports_path }}/{{ export.name }}_{{ "%03d" | format(instance +1 ) }} *(rw,root_squash)
+{% endfor %}
+{% endfor %}

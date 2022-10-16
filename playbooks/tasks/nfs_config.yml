@@ -1,0 +1,6 @@
+---
+- hosts: 'nfs'
+  collections:
+    - kmendez.lab_setup
+  roles:
+    - role: ../../roles/nfs

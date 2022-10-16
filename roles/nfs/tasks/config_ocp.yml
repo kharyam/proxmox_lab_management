@@ -1,0 +1,5 @@
+---
+
+- name: Configure OCP
+  ansible.builtin.debug:
+    msg: "TODO configure ocp with pvs pointing to nfs server"

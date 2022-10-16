@@ -1,8 +1,26 @@
 [all:vars]
-ansible_user=root
+ansible_user=kmendez
 ansible_connection=ssh
+ansible_become=true
 
 [proxmox_compute]
 192.168.30.21 ansible_user=root new_ip=192.168.30.21
 192.168.30.22 ansible_user=root new_ip=192.168.30.22 
 192.168.30.23 ansible_user=root new_ip=192.168.30.23 
+
+[proxmox_compute:vars]
+ui_port=8006
+
+[nas]
+192.168.30.20 ui_port=80
+
+
+[baremetal:children]
+proxmox_compute
+nas
+
+[nfs]
+nfs.home
+
+#[ocp_server]
+#ocp-proxmox.khary.net

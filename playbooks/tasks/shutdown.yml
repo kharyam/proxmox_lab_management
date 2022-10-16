@@ -1,0 +1,6 @@
+---
+- hosts: 'baremetal'
+  collections:
+    - kmendez.lab_setup
+  roles:
+    - role: ../../roles/shutdown
