@@ -1,0 +1,7 @@
+---
+- hosts: "{{ hosts_override | default('proxmox_compute') }}"
+  gather_facts: no
+  collections:
+    - kmendez.lab_setup
+  roles:
+    - role: ../../roles/poweron
