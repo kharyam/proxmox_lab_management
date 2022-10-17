@@ -1,0 +1,13 @@
+---
+# tasks file for poweron
+- name: Power on nodes
+  community.general.wakeonlan:
+    mac: "{{ mac }}" 
+  delegate_to: localhost
+
+- name: Wait for UIs to be responsive
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: "{{ ui_port }}"
+    state: started
+    timeout: 600 

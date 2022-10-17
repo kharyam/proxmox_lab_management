@@ -4,15 +4,15 @@ ansible_connection=ssh
 ansible_become=true
 
 [proxmox_compute]
-192.168.30.21 ansible_user=root new_ip=192.168.30.21
-192.168.30.22 ansible_user=root new_ip=192.168.30.22 
-192.168.30.23 ansible_user=root new_ip=192.168.30.23 
+192.168.30.21 ansible_user=root new_ip=192.168.30.21 mac=1C:83:41:31:66:21
+192.168.30.22 ansible_user=root new_ip=192.168.30.22 mac=1C:83:41:31:66:93
+192.168.30.23 ansible_user=root new_ip=192.168.30.23 mac=1C:83:41:31:69:6D
 
 [proxmox_compute:vars]
 ui_port=8006
 
 [nas]
-192.168.30.20 ui_port=80
+#192.168.30.20 ui_port=80
 
 [baremetal:children]
 proxmox_compute
