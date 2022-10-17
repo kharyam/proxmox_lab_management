@@ -20,4 +20,6 @@ exports:
     count: 20
   - name: pv40g
     count: 3
+  - name: pv100g_registry
+    count: 1
 # OCP Vars
