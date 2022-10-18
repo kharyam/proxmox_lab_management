@@ -18,8 +18,8 @@ ui_port=8006
 proxmox_compute
 nas
 
-[nfs]
-nfs.home
+#[nfs]
+#nfs.home
 
 [pi]
 192.168.30.3

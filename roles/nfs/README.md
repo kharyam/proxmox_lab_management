@@ -1,5 +1,12 @@
+
 nfs
 =========
+
+#############
+###  OBE  ###
+#############
+
+- Now using https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner 
 
 Create an nfs server with on a fedora server and create corresponding OpenShift PVs
 

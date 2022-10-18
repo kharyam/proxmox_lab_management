@@ -11,3 +11,4 @@
     port: "{{ ui_port }}"
     state: started
     timeout: 600 
+  ignore_unreachable: true
