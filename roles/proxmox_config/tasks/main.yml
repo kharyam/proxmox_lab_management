@@ -75,10 +75,10 @@
 
 - name: Reboot (proxmox upgraded with reboot required)
   ansible.builtin.reboot:
-  when: new_ip in ansible_facts['all_ipv4_addresses'] and reboot_required_file.stat.exists == true
+  when: new_ip == ansible_default_ipv4.address and reboot_required_file.stat.exists == true
 
 - name: Reboot (ip changed)
   ansible.builtin.reboot:
     reboot_timeout: 0
   ignore_errors: true
-  when: new_ip not in ansible_facts['all_ipv4_addresses']
+  when: new_ip != ansible_default_ipv4.address 
