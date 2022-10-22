@@ -9,3 +9,4 @@
     port: "{{ ui_port }}"
     state: stopped
     timeout: 600
+  ignore_unreachable: true
