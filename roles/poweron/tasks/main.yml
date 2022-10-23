@@ -5,10 +5,8 @@
     mac: "{{ mac }}" 
   delegate_to: localhost
 
-- name: Wait for UIs to be responsive
+- name: Wait for server to come up
   ansible.builtin.wait_for:
-    host: "{{ inventory_hostname }}"
+    host: "{{ ansible_host }}"
     port: "{{ ui_port }}"
-    state: started
-    timeout: 600 
-  ignore_unreachable: true
+  delegate_to: localhost
