@@ -1,7 +1,12 @@
 ---
 # tasks file for shutdown
-- name: Unconditionally shut down the server
+- name: Unconditionally shut down non truenas server
   community.general.shutdown:
+  when: '"truenas" not in ansible_version'
+
+- name: Unconditionally shut down truenas server
+  command: cli -c 'system shutdown'
+  when: '"truenas" in ansible_version'
 
 - name: Wait for port to close active connections
   ansible.builtin.wait_for:
@@ -10,3 +15,4 @@
     state: stopped
     timeout: 600
   delegate_to: localhost
+  when: '"truenas" not in ansible_version'
