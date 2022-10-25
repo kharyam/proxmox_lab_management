@@ -4,9 +4,11 @@
   community.general.wakeonlan:
     mac: "{{ mac }}" 
   delegate_to: localhost
+  become: no
 
 - name: Wait for server to come up
   ansible.builtin.wait_for:
     host: "{{ ansible_host }}"
     port: "{{ ui_port }}"
   delegate_to: localhost
+  become: no
