@@ -15,4 +15,3 @@
     state: stopped
     timeout: 600
   delegate_to: localhost
-  when: '"truenas" not in ansible_version'
