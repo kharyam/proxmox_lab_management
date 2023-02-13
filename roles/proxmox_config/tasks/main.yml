@@ -68,12 +68,12 @@
     - /etc/hosts
     - /etc/network/interfaces
 
-- name: Download ISOs
-  ansible.builtin.get_url:
-    url: "{{ item }}"
-    dest: "/var/lib/vz/template/iso/{{ item | basename }}"
-    force: no
-  loop: "{{ iso_images }}"
+#- name: Download ISOs
+#  ansible.builtin.get_url:
+#    url: "{{ item }}"
+#    dest: "/var/lib/vz/template/iso/{{ item | basename }}"
+#    force: no
+#  loop: "{{ iso_images }}"
 
 - name: Reboot (proxmox upgraded with reboot required)
   ansible.builtin.reboot:

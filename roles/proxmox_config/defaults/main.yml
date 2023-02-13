@@ -17,6 +17,7 @@ proxmox_packages:
   - mesa-utils
   - virt-viewer
   - remmina 
+  - network-manager-gnome
 
 disabled_services:
   - lightdm
