@@ -1,7 +1,7 @@
 ---
 # defaults file for proxmox_config
 
-proxmox_non_enterprise_subscription: deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+proxmox_non_enterprise_subscription: deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
 
 proxmox_packages:
   - sudo
