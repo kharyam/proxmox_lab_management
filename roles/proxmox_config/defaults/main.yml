@@ -18,6 +18,9 @@ proxmox_packages:
   - virt-viewer
   - remmina 
   - network-manager-gnome
+  - libgl1
+  - libegl1
+  - lm-sensors
 
 disabled_services:
   - lightdm
